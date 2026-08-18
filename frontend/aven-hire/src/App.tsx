@@ -1,6 +1,27 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, ReactNode, RefObject, FormEvent } from "react";
 
-const TICKER_SEED = [
+type Status = "received" | "screening" | "ranked";
+
+interface TickerEntry {
+  id: string;
+  initials: string;
+  source: string;
+  role: string;
+  status: Status;
+}
+
+interface ScreeningResult {
+  score: number;
+  summary: string;
+  highlights?: string[];
+  gaps?: string[];
+}
+
+interface ContentBlock {
+  text?: string;
+}
+
+const TICKER_SEED: TickerEntry[] = [
   { id: "AH-2291", initials: "J.M.", source: "LinkedIn", role: "Product Designer", status: "received" },
   { id: "AH-2292", initials: "R.K.", source: "Indeed", role: "Operations Lead", status: "received" },
   { id: "AH-2293", initials: "S.O.", source: "WhatsApp", role: "Sales Manager", status: "received" },
@@ -8,8 +29,8 @@ const TICKER_SEED = [
   { id: "AH-2295", initials: "D.N.", source: "LinkedIn", role: "Marketing Director", status: "received" },
 ];
 
-const STATUS_SEQUENCE = ["received", "screening", "ranked"];
-const STATUS_LABEL = {
+const STATUS_SEQUENCE: Status[] = ["received", "screening", "ranked"];
+const STATUS_LABEL: Record<Status, string> = {
   received: "RECEIVED",
   screening: "SCREENING",
   ranked: "RANKED",
@@ -43,9 +64,10 @@ const FAQS = [
   }
 ];
 
-function useReveal() {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+function useReveal(): [RefObject<HTMLDivElement | null>, boolean] {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState<boolean>(false);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -63,10 +85,17 @@ function useReveal() {
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
   return [ref, visible];
 }
 
-function Reveal({ children, delay = 0, className = "" }) {
+interface RevealProps {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const [ref, visible] = useReveal();
   return (
     <div
@@ -81,8 +110,12 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-function Stamp({ status }) {
-  const styles = {
+interface StampProps {
+  status: Status;
+}
+
+function Stamp({ status }: StampProps) {
+  const styles: Record<Status, string> = {
     received: "text-[#55534A] border-[#55534A] bg-transparent",
     screening: "text-[#B8860B] border-[#B8860B] bg-amber-50",
     ranked: "text-[#1F5D50] border-[#1F5D50] bg-[#E0ECE8]",
@@ -96,7 +129,7 @@ function Stamp({ status }) {
 }
 
 function ManifestTicker() {
-  const [entries, setEntries] = useState(TICKER_SEED);
+  const [entries, setEntries] = useState<TickerEntry[]>(TICKER_SEED);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -179,7 +212,7 @@ function LiveDemo() {
     "Marcus Vance. 4 years as Operations Coordinator at a regional distribution hub. Managed vendor contracts, improved fulfillment turnaround by 22%, proficient in Excel and Tableau. Supervised a team of 8 logistics associates."
   );
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<ScreeningResult | null>(null);
   const [error, setError] = useState("");
 
   const run = useCallback(async () => {
@@ -209,11 +242,11 @@ function LiveDemo() {
       });
       const data = await response.json();
       const text = (data.content || [])
-        .map((block) => block.text || "")
+        .map((block: ContentBlock) => block.text || "")
         .join("")
         .replace(/```json|```/g, "")
         .trim();
-      const parsed = JSON.parse(text);
+      const parsed: ScreeningResult = JSON.parse(text);
       setResult(parsed);
     } catch (err) {
       setError("Screening failed to complete. Please try again.");
@@ -289,7 +322,7 @@ function LiveDemo() {
               <div>
                 <p className="font-mono text-xs text-[#123E35] font-semibold uppercase tracking-wider mb-1">Key Strengths</p>
                 <ul className="list-disc list-inside text-sm text-[#1B1B16] space-y-1">
-                  {result.highlights.map((h, i) => (
+                  {result.highlights.map((h: string, i: number) => (
                     <li key={i}>{h}</li>
                   ))}
                 </ul>
@@ -299,7 +332,7 @@ function LiveDemo() {
               <div>
                 <p className="font-mono text-xs text-[#123E35] font-semibold uppercase tracking-wider mb-1">Requirements Gaps</p>
                 <ul className="list-disc list-inside text-sm text-[#1B1B16] space-y-1">
-                  {result.gaps.map((g, i) => (
+                  {result.gaps.map((g: string, i: number) => (
                     <li key={i}>{g}</li>
                   ))}
                 </ul>
@@ -316,9 +349,9 @@ export default function AvenHireLanding() {
   const [email, setEmail] = useState("");
   const [reserved, setReserved] = useState(false);
   const [emailError, setEmailError] = useState("");
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const submitWaitlist = (e) => {
+  const submitWaitlist = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       setEmailError("Please enter a valid email address.");
@@ -615,11 +648,8 @@ export default function AvenHireLanding() {
 
       {/* FOOTER */}
       <footer className="max-w-6xl mx-auto px-6 sm:px-10 py-8 border-t border-[#C9C6B8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#55534A]">
-        <div className="font-serif text-base font-semibold text-[#1B1B16]">
-          Aven<span className="text-[#1F5D50]">Hire</span>
-        </div>
-        <div>ONE MANIFEST · ALL APPLICATIONS</div>
-        <div>© 2026 AVENHIRE INC.</div>
+        <div>© 2026 AvenHire. All rights reserved.</div>
+        <div>UNIVERSAL CANDIDATE MANIFEST SYSTEM</div>
       </footer>
     </div>
   );
