@@ -1,75 +1,74 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ⚡ React + TypeScript + Vite
 
-Currently, two official plugins are available:
+**A fast, modern frontend starter template powered by Vite, React, and TypeScript.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![ESLint](https://img.shields.io/badge/ESLint-configured-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+</div>
 
-## Expanding the ESLint configuration
+## 📌 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **⚡ Instant Server Start & Fast HMR:** Powered by [Vite](https://vitejs.dev/).
+- **🛡️ Strict Type Safety:** Out-of-the-box TypeScript support with type-aware linting setup.
+- **⚡ Fast Compilation:** Configured with fast React plugins (Oxc / SWC support).
+- **🎨 Modern Design System:** Built-in modular color palette, structured typography, and theme token setup.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🎨 Design System & Color Palette
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+This project follows a structured, accessible color token hierarchy designed to support dark and light themes seamlessly.
 
-```
+### 🎨 Color Palette & Tokens
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Token Role | Light Mode Hex | Dark Mode Hex | Usage |
+| :--- | :--- | :--- | :--- |
+| **Primary** | `#646CFF` | `#747BFF` | Brand accent, active states, call-to-actions |
+| **Secondary** | `#61DAFB` | `#38BDF8` | Highlights, badges, secondary buttons |
+| **Background** | `#FFFFFF` | `#121214` | Primary view container background |
+| **Surface** | `#F8FAFC` | `#1E1E22` | Cards, modals, sidebars, drop-downs |
+| **Text Primary** | `#0F172A` | `#F8FAFC` | Main body headings and readable prose |
+| **Text Muted** | `#64748B` | `#94A3B8` | Captions, subtitles, disabled states |
+| **Border** | `#E2E8F0` | `#2E2E34` | Component separators, card outlines |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack & Architecture
 
-```
+- **UI Library:** [React](https://react.dev/)
+- **Type Checking:** [TypeScript](https://www.typescriptlang.org/)
+- **Build Tooling:** [Vite](https://vitejs.dev/)
+- **Linting:** [ESLint](https://eslint.org/) with `typescript-eslint`
+
+### Plugin Options
+
+By default, Vite offers two primary React integration plugins:
+1. **`@vitejs/plugin-react`** – Utilizes [Oxc](https://oxc.rs) for fast transform performance.
+2. **`@vitejs/plugin-react-swc`** – Uses [SWC](https://swc.rs/) for Rust-backed compilation.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org/) (version 18+) installed.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+
+# Navigate into the project directory
+cd your-repo-name
+
+# Install dependencies
+npm install
