@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, ReactNode, RefObject, FormEvent } from "react";
+import { useState, useEffect, type ReactNode, type RefObject, type FormEvent } from "react";
 
 type Status = "received" | "screening" | "ranked";
 
