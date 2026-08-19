@@ -390,43 +390,92 @@ export default function AvenHireLanding() {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 pt-16 pb-12 sm:pt-20 sm:pb-16">
-        <Reveal>
-          <span className="font-mono text-xs tracking-widest text-[#123E35] border border-[#1F5D50] bg-[#E0ECE8] px-3.5 py-1.5 inline-block mb-6 font-medium shadow-[inset_1px_1px_0px_rgba(255,255,255,0.7)]">
-            APPLICATION MANIFEST · NO. 000-1
+      {/* HERO SECTION */}
+<section className="max-w-6xl mx-auto px-6 sm:px-10 pt-12 pb-16 sm:pt-16 sm:pb-24">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+    
+    {/* LEFT COLUMN: Content & Value Prop (7 cols on desktop) */}
+    <div className="lg:col-span-7 flex flex-col justify-center">
+      {/* <Reveal delay={0}>
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1F5D50]/10 border border-[#1F5D50]/30 font-mono text-xs text-[#1F5D50] font-semibold mb-6">
+          <span className="w-2 h-2 rounded-full bg-[#1F5D50] animate-pulse" />
+          <span>MANIFEST ENGINE v1.0</span>
+        </div>
+      </Reveal> */}
+
+      <Reveal delay={80}>
+        <h1 className="font-serif text-4xl sm:text-6xl lg:text-6xl font-normal tracking-tight leading-[1.08] text-[#1B1B16]">
+          One link. Every channel. <br />
+          <span className="text-[#1F5D50] italic font-serif">
+            All candidates in one manifest.
           </span>
-        </Reveal>
-        <Reveal delay={80}>
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] max-w-4xl">
-            One link. Every channel. <br className="hidden sm:inline" />
-            <span className="text-[#1F5D50] font-medium">All applications land in one manifest.</span>
-          </h1>
-        </Reveal>
-        <Reveal delay={160}>
-          <p className="text-base sm:text-lg text-[#55534A] max-w-2xl mt-6 mb-8 leading-relaxed">
-            Stop checking four job boards, three email inboxes, and endless spreadsheets. AvenHire generates one master link for any job role. Every application flows into a single, organized manifest—automatically summarized and ranked by AI.
-          </p>
-        </Reveal>
-        <Reveal delay={220}>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            <a
-              href="#waitlist"
-              className="px-6 py-3.5 text-center font-medium text-white bg-[#1F5D50] hover:bg-[#123E35] border border-[#123E35] shadow-[2px_2px_0px_rgba(27,27,22,0.2)] transition-all"
-            >
-              Get Early Access
-            </a>
-            <a
-              href="#demo"
-              className="px-6 py-3.5 text-center font-medium text-[#1B1B16] hover:text-[#1F5D50] underline underline-offset-4 transition-colors"
-            >
-              Try the Live Manifest ↓
-            </a>
+        </h1>
+      </Reveal>
+
+      <Reveal delay={160}>
+        <p className="text-base sm:text-lg text-[#55534A] max-w-xl mt-6 mb-8 leading-relaxed">
+          Stop sifting through scattered job boards, email attachments, and endless spreadsheets. AvenHire generates one universal link for any role and routes every application into an AI-ranked master ledger.
+        </p>
+      </Reveal>
+
+      <Reveal delay={220}>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a
+            href="#waitlist"
+            className="px-6 py-3.5 text-center font-medium text-white bg-[#1F5D50] hover:bg-[#123E35] border border-[#123E35] shadow-[3px_3px_0px_rgba(27,27,22,0.2)] active:translate-x-[1px] active:translate-y-[1px] transition-all"
+          >
+            Get Early Access
+          </a>
+          <a
+            href="#demo"
+            className="px-6 py-3.5 text-center font-medium text-[#1B1B16] hover:text-[#1F5D50] underline underline-offset-4 transition-colors text-sm"
+          >
+            Try Live Screening ↓
+          </a>
+        </div>
+      </Reveal>
+
+      {/* METRIC STRIP */}
+      <Reveal delay={280} className="mt-12 pt-8 border-t border-[#C9C6B8]">
+        <div className="grid grid-cols-3 gap-4 font-mono">
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#1B1B16]">1 Link</div>
+            <div className="text-[11px] text-[#55534A] tracking-wider uppercase">Universal Input</div>
           </div>
-        </Reveal>
-        <Reveal delay={300} className="mt-12">
-          <ManifestTicker />
-        </Reveal>
-      </section>
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#1F5D50]">100%</div>
+            <div className="text-[11px] text-[#55534A] tracking-wider uppercase">Auto-Parsed</div>
+          </div>
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#1B1B16]">&lt; 5m</div>
+            <div className="text-[11px] text-[#55534A] tracking-wider uppercase">Shortlist Time</div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+
+    {/* RIGHT COLUMN: Interactive Ledger Widget (5 cols on desktop) */}
+    <div className="lg:col-span-5 w-full">
+      <Reveal delay={200}>
+        <div className="relative">
+          {/* Subtle background card effect for depth */}
+          <div className="absolute -inset-2 bg-[#1F5D50]/5 border border-[#1F5D50]/20 translate-x-2 translate-y-2 -z-10" />
+          
+          <div className="bg-[#DAD8CB] border-2 border-[#1B1B16] shadow-[4px_4px_0px_rgba(27,27,22,0.2)] overflow-hidden">
+            <div className="bg-[#1B1B16] text-[#E3E1D6] px-4 py-2 flex items-center justify-between font-mono text-[11px] tracking-widest uppercase">
+              <span>SYSTEM FEED · LIVE LEDGER</span>
+              <span className="text-[#1F5D50] font-bold">● ACTIVE</span>
+            </div>
+            <div className="p-2 sm:p-3 bg-[#E3E1D6]/50">
+              <ManifestTicker />
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+
+  </div>
+</section>
 
       {/* MANIFEST FOCUS CONCEPT SECTION */}
       <section className="border-t border-[#C9C6B8] bg-[#DAD8CB] py-16" id="manifest-concept">
